@@ -5,6 +5,8 @@ import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { v4 as uuidv4 } from "uuid";
+
 const step2Schema = z.object({
     members: z.array(
         z.object({
@@ -29,6 +31,8 @@ export default function Step2() {
     const {
         register,
         handleSubmit,
+        setValue,
+        getValues,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(step2Schema),
@@ -43,6 +47,15 @@ export default function Step2() {
         addToForm({ step2: value });
 
         changeStep(1);
+    };
+
+    const removeMember = (index: number) => {
+        const currentValue = getValues();
+
+        const newMembers = currentValue.members.filter((_, i) => index !== i);
+        setValue("members", newMembers);
+
+        setTotalInputs((prev) => prev - 1);
     };
 
     return (
@@ -60,7 +73,7 @@ export default function Step2() {
                         alignItems={"center"}
                     >
                         {Array.from({ length: totalInputs }, (_, index) => (
-                            <Stack spacing={2} key={index} direction={"row"}>
+                            <Stack spacing={2} key={uuidv4()} direction={"row"}>
                                 <Stack spacing={1}>
                                     <TextField
                                         {...register(
@@ -98,6 +111,7 @@ export default function Step2() {
                                 <Button
                                     variant="outlined"
                                     sx={{ height: "fit-content" }}
+                                    onClick={() => removeMember(index)}
                                 >
                                     Delete
                                 </Button>

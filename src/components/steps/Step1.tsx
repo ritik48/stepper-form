@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const step1Schema = z.object({
     firstName: z.string().min(4, "First name must be min 4 character"),
-    lastName: z.string().min(6, "Last name must be min 4 character"),
+    lastName: z.string().min(3, "Last name must be min 3 character"),
 });
 
 type Step1SchemaType = z.infer<typeof step1Schema>;

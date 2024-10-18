@@ -4,22 +4,22 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { useStepForm } from "../hooks/FormContext";
 import Step1 from "./steps/Step1";
-// import Step2 from "./steps/Step2";
+import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import { Alert, Button } from "@mui/material";
 
 const steps = {
     "Step 1": <Step1 />,
+    "Step 2": <Step2 />,
     "Step 3": <Step3 />,
-    // "Step 3": <Step3 />,
 };
 
 export default function StepperForm() {
-    const { activeStep, changeStep } = useStepForm();
+    const { activeStep, changeStep, resetForm } = useStepForm();
 
     return (
         <Box sx={{ width: "80%", marginInline: "auto" }}>
-            {activeStep === 2 ? (
+            {activeStep === 3 ? (
                 <>
                     <Alert
                         severity="success"
@@ -27,7 +27,14 @@ export default function StepperForm() {
                     >
                         Form is successfully submitted.
                     </Alert>
-                    <Button onClick={() => changeStep(-2)}>Start Again</Button>
+                    <Button
+                        onClick={() => {
+                            resetForm();
+                            changeStep(-3);
+                        }}
+                    >
+                        Start Again
+                    </Button>
                 </>
             ) : (
                 <>
@@ -39,7 +46,8 @@ export default function StepperForm() {
                         ))}
                     </Stepper>
                     {activeStep === 0 && steps["Step 1"]}
-                    {activeStep === 1 && steps["Step 3"]}
+                    {activeStep === 1 && steps["Step 2"]}
+                    {activeStep === 2 && steps["Step 3"]}
                     {/* If you had Step 2, you would add it here */}
                 </>
             )}

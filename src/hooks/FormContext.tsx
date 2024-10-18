@@ -10,12 +10,14 @@ type FormContextType = {
             | Pick<FormValueType, "step3">
     ) => void;
     formValues: FormValueType;
+    resetForm: () => void;
 };
 
 const initialContextValue = {
     activeStep: 0,
     changeStep: () => {},
     addToForm: () => {},
+    resetForm: () => {},
     formValues: {
         step1: {
             firstName: "",
@@ -82,9 +84,13 @@ export const StepFormProvider = ({
         setFormValues((prev) => ({ ...prev, ...value }));
     };
 
+    const resetForm = () => {
+        setFormValues(initialContextValue.formValues);
+    };
+
     return (
         <FormContext.Provider
-            value={{ addToForm, changeStep, activeStep, formValues }}
+            value={{ addToForm, changeStep, activeStep, formValues, resetForm }}
         >
             {children}
         </FormContext.Provider>

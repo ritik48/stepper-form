@@ -15,7 +15,7 @@ const steps = {
 };
 
 export default function StepperForm() {
-    const { activeStep, changeStep, resetForm } = useStepForm();
+    const { activeStep, changeStep, resetForm, formValues } = useStepForm();
 
     return (
         <Box sx={{ width: "80%", marginInline: "auto" }}>
@@ -29,6 +29,7 @@ export default function StepperForm() {
                     </Alert>
                     <Button
                         onClick={() => {
+                            console.log("Submitted = ", formValues);
                             resetForm();
                             changeStep(-3);
                         }}

@@ -6,20 +6,6 @@ import { StepFormProvider } from "./hooks/FormContext";
 import { Typography } from "@mui/material";
 
 function App() {
-    // const onSubmit = (values: any) => {
-    //     console.log(values);
-    // };
-
-    // const deleteMember = (index: number) => {
-    //     const val = getValues();
-
-    //     setValue(
-    //         "members",
-    //         val.members.filter((_, i) => index !== i)
-    //     );
-    //     setTotalInputs((prev) => prev - 1);
-    // };
-
     return (
         <div className="cont">
             <Typography variant="h3" sx={{ marginBlock: "20px" }}>
